@@ -13,18 +13,17 @@ class Airport {
   }
 
   harbourPlane(plane) {
-    if (this.weather == 'stormy') { throw new Error("plane cannot land") };
-    if (this.hangar.length >= 100) { throw new Error("hangar is full") };
+    if (this.weather === 'stormy') { throw new Error("plane cannot land") };
+    if (this.hangar.length >= this.capacity) { throw new Error("hangar is full") };
 
     plane.land;
     this.hangar.push(plane);
   }
 
   commissionFlight(plane) {
-    if (this.weather == 'stormy') { throw new Error("plane cannot take off") };
+    if (this.weather === 'stormy') { throw new Error("plane cannot take off") };
     
     plane.takeOff;
-    this.hangar.splice(this.hangar.indexOf(plane), 1)
-    return 'THIS..'
+    this.hangar.splice(this.hangar.indexOf(plane))
   }
 };

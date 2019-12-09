@@ -41,15 +41,27 @@ describe("Airport", () => {
 
   describe("when harbouring planes", () => {
     it("should deny landing if airport is full", () => {
-      let testAirport = new Airport;
+      let testAirport = new Airport(10);
 
-      for(let i = 0; i < 100; i++) {
+      for(let i = 0; i < 10; i++) {
         testAirport.harbourPlane(new Plane);
       };
 
       expect(() => {
         testAirport.harbourPlane(testPlane);
       }).toThrowError("hangar is full");
+    })
+  });
+
+  describe("after commissioning a flight", () => {
+    let testPlane2 = new Plane;
+
+    it("should not have the commissioned plane in the airport", () => {
+      testAirport.harbourPlane(testPlane);
+      testAirport.harbourPlane(testPlane2);
+      testAirport.commissionFlight(testPlane);
+
+      expect(testAirport.hangar).not.toContain(testPlane);
     })
   });
 })
