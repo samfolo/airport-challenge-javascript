@@ -1,23 +1,55 @@
-describe("Airport", function() {
+describe("Airport", () => {
   let testPlane = new Plane;
   let testAirport = new Airport;
 
-  let clearDay = { weatherReport() { return Symbol('clear'); } }
-  let stormyDay = { weatherReport() { return Symbol('stormy'); } }
+  let clearDay = { weatherReport() { return 'clear'; } }
+  let stormyDay = { weatherReport() { return 'stormy'; } }
 
-  beforeEach(function() {
+  beforeEach(() => {
     testAirport.weather = clearDay.weatherReport();
   });
 
-  describe("hangar capacity", function() {
-    it("should have a default value of 100", function() {
+  describe("hangar capacity", () => {
+    it("should have a default value of 100", () => {
       expect(testAirport.capacity).toEqual(100);
     })
 
-    it("should be able to be overwritten", function() {
+    it("should be able to be overwritten", () => {
       let customAirport = new Airport(600);
-
       expect(customAirport.capacity).toEqual(600);
+    })
+  });
+  
+  describe("in stormy weather", () => {
+    it("should not allow planes to take off", () => {
+      expect(() => {
+        testAirport.harbourPlane(testPlane);
+        testAirport.weather = stormyDay.weatherReport();
+        testAirport.commissionFlight(testPlane);
+      }).toThrowError("plane cannot take off");
+    })
+
+    it("should not allow planes to take off", () => {
+      expect(() => {
+        testAirport.harbourPlane(testPlane);
+        testAirport.commissionFlight(testPlane);
+        testAirport.weather = stormyDay.weatherReport();
+        testAirport.harbourPlane(testPlane);
+      }).toThrowError("plane cannot land");
+    })
+  });
+
+  describe("when harbouring planes", () => {
+    it("should deny landing if airport is full", () => {
+      let testAirport = new Airport;
+
+      for(let i = 0; i < 100; i++) {
+        testAirport.harbourPlane(new Plane);
+      };
+
+      expect(() => {
+        testAirport.harbourPlane(testPlane);
+      }).toThrowError("hangar is full");
     })
   });
 })
