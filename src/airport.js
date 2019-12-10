@@ -16,14 +16,18 @@ class Airport {
     if (this.weather === 'stormy') { throw new Error("plane cannot land") };
     if (this.hangar.length >= this.capacity) { throw new Error("hangar is full") };
 
-    plane.land;
+    plane.land();
     this.hangar.push(plane);
+    plane.accountedFor = true;
   }
 
   commissionFlight(plane) {
     if (this.weather === 'stormy') { throw new Error("plane cannot take off") };
+    if (plane.airborne === true) { 
+      throw new Error("plane is already airborne") 
+    };
     
-    plane.takeOff;
+    plane.takeOff();
     this.hangar.splice(this.hangar.indexOf(plane))
   }
 };

@@ -63,5 +63,14 @@ describe("Airport", () => {
 
       expect(testAirport.hangar).not.toContain(testPlane);
     })
+
+    it("should not be able to commission the same plane while airborne", () => {
+      testAirport.harbourPlane(testPlane);
+      testAirport.commissionFlight(testPlane);
+
+      expect(() => {
+        testAirport.commissionFlight(testPlane)
+      }).toThrowError("plane is already airborne");
+    })
   });
 })
