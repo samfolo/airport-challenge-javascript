@@ -1,3 +1,5 @@
+var Plane = require('../src/plane.js');
+
 describe("Plane", () =>{
   let testPlanePlaneSpec = new Plane;
 

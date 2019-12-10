@@ -1,3 +1,6 @@
+var Plane = require('../src/plane.js');
+var Airport = require('../src/airport.js');
+
 describe("Airport", () => {
   let testPlane = new Plane;
   let testAirport = new Airport;

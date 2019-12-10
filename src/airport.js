@@ -31,3 +31,7 @@ class Airport {
     this.hangar.splice(this.hangar.indexOf(plane))
   }
 };
+
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = Airport;
+}

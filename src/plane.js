@@ -1,12 +1,5 @@
-let id = 0
-
-const generateId = () => {
-  return id++;
-};
-
 class Plane {
   constructor() {
-    this.id = generateId();
     this.accountedFor = false;
     this.airborne = false;
   }
@@ -24,4 +17,8 @@ class Plane {
     this.airborne = false;
     this.accountedFor = true;
   }
+}
+
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+  module.exports = Plane;
 }
